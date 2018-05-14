@@ -8,10 +8,9 @@ class ProductCondensed extends Component {
         // return the component
         return (
             // Create a separate component for the list item
-            <li className="list-group-item">
-                <a className="btn btn-outline-danger">
-                    {this.props.product.title} | ${this.props.product.price}
-                </a>
+            <li className="list-group-item pc-condensed">
+                <a className="btn btn-outline-danger">X</a>
+                <p>{this.props.product.title} | <b>${this.props.product.price}</b></p>
             </li>
         );
     }

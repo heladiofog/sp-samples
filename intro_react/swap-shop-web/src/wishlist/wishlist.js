@@ -9,7 +9,23 @@ class WishList extends Component {
     constructor (props) {
         super(props);
 
-        
+        this.state = {wishlist:[
+            {
+                title: "Vaqueraza",
+                price: 15.00,
+                _id: "dadasj83li3"
+            },
+            {
+                title: "Cochi",
+                price: 152.00,
+                _id: "dadfs4444fv"
+            },
+            {
+                title: "Pato",
+                price: 152.00,
+                _id: "dadacdas32"
+            }
+        ]}
 
         // Bind functions
         this.createWishList = this.createWishList.bind(this);
@@ -31,7 +47,7 @@ class WishList extends Component {
                     <h4 className="card-title">Wish List</h4>
                     <ul className="list-gruop">
                     {/* Create a separate component for the list Item */}
-                        <ProductCondensed  />
+                        {this.createWishList()}
                     </ul>
                 </div>
             </div>
