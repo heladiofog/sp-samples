@@ -1,0 +1,5 @@
+# pack-refs with: peeled fully-peeled sorted 
+0ec123ac378057da45f0fcbc77509417a9f546ac refs/remotes/origin/dev
+a5478009ebcb7396536024d25359a38bce7df25c refs/remotes/origin/docker
+200267506f13fe99ac360fb215ee0f5647dc5c4a refs/remotes/origin/master
+7d8309063048c6c92c7c17458f8b135b28e2bb66 refs/remotes/origin/sls-express-app
