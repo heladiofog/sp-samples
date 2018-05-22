@@ -11,6 +11,8 @@ var User = require('../user/User');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var config = require('../config');
+// Middleware
+var VerifyToken = require('./VerifyToken');
 
 // Register endpoint
 router.post('/register', function(req, res) {
@@ -37,38 +39,27 @@ router.post('/register', function(req, res) {
 });
 
 // Let’s write a piece of code to get the user id based on the token we got back from the register endpoint.
-router.get('/me', function(req, res, next) {
-    var token = req.headers['x-access-token'];
-    
-    if (!token) {
-        return res.status(401). // unauthorized
-            send({ auth: false, message: 'No token provided.' });
-    }
-    // Token verification
-    /* This method decodes the token making it possible to view the original payload. (the id)
-        We’ll handle errors if there are any and if there are not, 
-        send back the decoded value as the response.
-    */
-    jwt.verify(token, config.secret, function(err, decoded) {
-        if (err) {
-            return res.status(500).
-                send({ auth: false, message: 'Failed to authenticate token.'});
-        }
-        // Returns the token decoded
-        // res.status(200).send(decoded);
-        // to Find user By id
-        User.findById(decoded.id,
-            { password: 0 },
-            function (err, user) {
-                if (!user) {
-                    return res.status(404).send("No user found.");
-                }
-                // Return user found
-                // res.status(200).send(user);
-                next(user);
+router.get('/me', VerifyToken, function(req, res, next) {
+    // Returns the token decoded
+    // res.status(200).send(decoded);
+    // to Find user By id
+    User.findById(req.userId,
+        { password: 0 },
+        function (err, user) {
+            // 500 Server Error
+            if (err) {
+                return res.status(500).
+                    send({ auth: false, message: 'There was a problem finding the user.'});
             }
-        );
-    });
+            // 404 Not user found
+            if (!user) {
+                return res.status(404).send("No user found.");
+            }
+            // Return user found
+            res.status(200).send(user);
+            // next(user);  // Only to clarify
+        }
+    );
 });
 
 // // Middleware function
