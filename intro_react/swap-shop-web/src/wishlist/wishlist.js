@@ -2,21 +2,27 @@
 import React, {Component} from 'react';
 import './wishlist.css';
 import ProductCondensed from '../product-condensed/product-condensed';
+// Services
+import DataService from '../services/data-service';
+import NotificationService, {NOTIF_WISHLIST_CHANGED} from '../services/notification-service';
+
+let ns = new NotificationService();
 
 // Defining a reusable component
 class WishList extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
 
-        this.state = {wishlist:[
-            {
+        this.state = { wishList:[] };
+        /*// Test data
+        {
                 title: "Vaqueraza",
                 price: 15.00,
                 _id: "dadasj83li3"
             },
             {
-                title: "Cochi",
+                title: "Tocino",
                 price: 152.00,
                 _id: "dadfs4444fv"
             },
@@ -24,15 +30,32 @@ class WishList extends Component {
                 title: "Pato",
                 price: 152.00,
                 _id: "dadacdas32"
-            }
-        ]}
+            }*/
 
         // Bind functions
         this.createWishList = this.createWishList.bind(this);
+        this.onWishListChanged = this.onWishListChanged.bind(this);
+    }
+
+    // Observers, natives from React life cycle
+    componentDidMount() {
+        console.log('Check to see if firing DidMount')
+        ns.addObserver(NOTIF_WISHLIST_CHANGED, this, this.onWishListChanged);
+    }
+
+    componentWillUnmount() {
+        console.log('Check to see if firing DidUnmount')
+        ns.removeObserver(this, NOTIF_WISHLIST_CHANGED);
+    }
+
+    // Refresh the component
+    onWishListChanged(newWihsList) {
+        // Reset the state for the component to be refreshes
+        this.setState({ wishList: newWihsList });
     }
 
     createWishList = () => {
-        const list = this.state.wishlist.map((product) =>
+        const list = this.state.wishList.map((product) =>
             <ProductCondensed product={product} key={product._id} />
         );
 

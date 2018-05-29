@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 // Components
+import Header from '../header/header';
 import Product from '../product/product';
 import WishList from '../wishlist/wishlist';
 
@@ -30,7 +31,8 @@ class App extends Component {
 
     // Data Loading
     loadData = () => {
-        var self = this;    // refe to the component because of the promise (async) down there
+        // reference to the component itself because of the promise (async) down there
+        var self = this;
 
         http.getProducts().then(data => {   // retrieving the promise success
             console.log(data);
@@ -41,17 +43,18 @@ class App extends Component {
         });
     }
     
-    // Printing product List
+    // Printing product List with Product components
     productList = () => {
         // TO DO Check for map function, iterates over a collection
         const list = this.state.products.map((product) => 
             // Create a Product html block
             <div className="col-sm-4" key={product._id}>
-                <Product title={product.title} imgUrl={product.imgUrl} price={product.price} />
+                {/* Passing the product itself */}
+                <Product product={product} />
             </div>
         );
 
-        return list;
+        return (list);
     }
 
     render() {
@@ -62,6 +65,7 @@ class App extends Component {
                     {/* <img className="card-img-top" alt="Product" /> */}
                     <h1 className="App-title">Welcome to React Swag Shop</h1>
                 </header>
+                <Header />
                 <div className="container-fluid App-main">
                     {/* Props sample: */}
                     <div className="row">
