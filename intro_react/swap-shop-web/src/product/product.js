@@ -16,7 +16,7 @@ class Product extends Component {
     constructor(props) {
         super(props);
 
-        // 
+        // Check if a product is in our product wishList
         this.state = { onWishList: ds.itemOnWishList() };
         // Bind functions
         this.onButtonClicked = this.onButtonClicked.bind(this);
@@ -37,6 +37,7 @@ class Product extends Component {
     }
 
     onButtonClicked = () => {
+        // Product Logic 
         if (this.state.onWishList) {
             ds.removeWishListItem(this.props.product);
         } else {
@@ -47,12 +48,13 @@ class Product extends Component {
     }
 
     render() {
+        // Some front stylish logic
         var btnClass;
 
         if (this.state.onWishList) {
-            btnClass = "btn btn-danger";
+            btnClass = "btn btn-danger";    // You can remove it
         } else {
-            btnClass = "btn btn-primary";
+            btnClass = "btn btn-primary";   // You can add it
         }
         
         // return the component
@@ -62,7 +64,8 @@ class Product extends Component {
                 <div className="card-block">
                     <h4 className="card-title">{this.props.product.title}</h4>
                     <p className="card-text">Price: $ {this.props.product.price} </p>
-                    <a href="#" onClick={ () => this.onButtonClicked() } className={btnClass}>
+                    <a href="#" onClick={ () => this.onButtonClicked() } 
+                        className={btnClass}>
                         {/* Ternary operation on React */}
                         {this.state.onWishList ? "Remove From Wish List" : "Add To Cart"}
                     </a>

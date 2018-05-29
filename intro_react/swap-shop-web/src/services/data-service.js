@@ -27,10 +27,10 @@ class DataService {
 
         return false;
     }
-
+    
     addWishListItem = item => {
         wishList.push(item);
-        // notification
+        // notification being posted
         ns.postNotification(NOTIF_WISHLIST_CHANGED, wishList);
     }
 
@@ -38,7 +38,7 @@ class DataService {
         for (var x = 0; x < wishList.length; x++) {
             if (wishList[x]._id === item._id) {
                 wishList.splice(x, 1);
-                // notification
+                // notification being posted
                 ns.postNotification(NOTIF_WISHLIST_CHANGED, wishList);
                 break;
             }
