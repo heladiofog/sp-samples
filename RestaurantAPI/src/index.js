@@ -10,9 +10,9 @@ let app = express();
 app.server = http.createServer(app);
 
 // middleware
-
-// parse application/json in a request
-app.use(bodyParser.json({
+// For parse application/json in a request on the middleware
+app.use(
+	bodyParser.json({
 		limit: config.bodyLimit
 	})
 );
@@ -21,8 +21,8 @@ app.use(bodyParser.json({
 // api routes v1
 app.use('/v1', routes);
 
+// Start the server
 app.server.listen(config.port);
-
 console.log(`Started on port on ${app.server.address().port}`);
 
 export default app;
