@@ -9,7 +9,7 @@ export default({ config, db }) => {
 
 	// Create - (v1 => version 1) '/v1/restaurant/add'
 	api.post('/add', (req, res) => {
-		console.log(req.body);
+		console.log(`Restaurant to be created: ${req.body}`);
 		let newRest = new Restaurant();
 		newRest.name = req.body.name;
 
@@ -20,7 +20,7 @@ export default({ config, db }) => {
 			}
 
 			// res.status(200).json({ message: 'Restaurant saved successfully.'});
-			res.json({ message: 'Restaurant saved successfully.'});
+			res.json({ message: 'Restaurant saved successfully!' });
 		});
 	});
 
@@ -33,7 +33,7 @@ export default({ config, db }) => {
 				res.state(500).send(err);
 			}
 
-			res.json(restaurants);
+			res.status(200).json(restaurants);
 		});
 	});
 
@@ -66,6 +66,20 @@ export default({ config, db }) => {
 			});
 		});
 	});
+
+	// Delete - '/v1/restaurant/:id'
+	api.delete('/:id', (req, res) => {
+		Restaurant.remove({
+			_id: req.params.id
+		}, (err, restaurant) => {
+			if (err) {
+				res.status(500).send(err);
+			}
+
+			res.status(200).json({ message: "Restaurant susccessfully removed!" });
+		});
+	});
+	
 
 	return api;
 }
