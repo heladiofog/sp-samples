@@ -1,6 +1,6 @@
 // Passing a plain object to the app
 export default {
 	"port": 3005,
-	"mongoUrl": 'mongodb://localhost:27017/restaurant-api',
+	"mongoUrl": 'mongodb://localhost:27017/foodtruck-api',
 	"bodyLimit": "100kb"
 }
