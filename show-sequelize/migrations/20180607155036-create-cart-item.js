@@ -29,12 +29,12 @@ module.exports = {
         type: Sequelize.DATE
       },
       // belongs to a Cart
-      cartId: {
+      CartId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
       // has one product
-      productId: {
+      ProductId: {
         type: Sequelize.INTEGER,
         allowNull: false
       }
