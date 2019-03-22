@@ -1,5 +1,5 @@
 {
-    "name": "RestaurantAPI",
+    "name": "sp-restaurant-api",
     "version": "1.0.0",
     "description": "Site Point exercise for an RESTful API development at the course: creating-a-rest-api-with-node-js-2992",
     "main": "dist",
@@ -30,15 +30,15 @@
     "dependencies": {
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
-        "mongoose": "^5.0.6"
+        "mongoose": "^5.4.19"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
-        "babel-core": "^6.26.0",
+        "babel-core": "^6.26.3",
         "babel-eslint": "^8.2.2",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-stage-0": "^6.24.1",
-        "eslint": "^4.18.1",
-        "nodemon": "^1.15.1"
+        "eslint": "^5.15.3",
+        "nodemon": "^1.18.10"
     }
 }
