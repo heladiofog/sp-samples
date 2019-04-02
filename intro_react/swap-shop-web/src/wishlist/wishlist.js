@@ -38,17 +38,18 @@ class WishList extends Component {
     }
 
     // Observers, natives from React life cycle
+    // When the component is rendered on the screen
     componentDidMount() {
         console.log('Check to see if firing DidMount')
         ns.addObserver(NOTIF_WISHLIST_CHANGED, this, this.onWishListChanged);
     }
-
+    // When the component is out of memory
     componentWillUnmount() {
         console.log('Check to see if firing DidUnmount')
         ns.removeObserver(this, NOTIF_WISHLIST_CHANGED);
     }
 
-    // Refresh the component
+    // Refresh the component, observer callback function
     onWishListChanged(newWihsList) {
         // Reset the state for the component to be refreshes
         this.setState({ wishList: newWihsList });

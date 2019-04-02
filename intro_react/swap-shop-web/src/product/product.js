@@ -5,7 +5,6 @@ import './product.css';
 // Services
 import DataService from '../services/data-service';
 import NotificationService, {NOTIF_WISHLIST_CHANGED} from '../services/notification-service';
-import WishList from '../wishlist/wishlist'
 
 let ds = new DataService();
 let ns = new NotificationService();
