@@ -11,33 +11,48 @@ const Coffee = require('./models').Coffee;
 const Product = require('./models').Product;
 const Category = require('./models').Category;
 
-// Test Product Categories
+// Test 2 Product Categories
 Product.create({
-    name: 'Panditas',
-    description: 'Gomitas de colores',
-    price: 7.50
-}).then(product  => {
-    return Category.create({ 
-        name: "Dulces",
-        description: "Candies"
-     }).then(category => {
-        return product.hasCategory(category)
-            .then(result => {
-                // result would be false
-                console.log("There is no cat on prod");
-                return product.addCategory(category)
-                    .then(() => {
-                        // Cat added to prod
-                        console.log("Cat added to prod");
-                        return product.hasCategory(category)
-                            .then(result => {
-                                console.log("There IS cat on prod");
-                                // result would be true
-                            });
-                    });
-            });
-    })
+    name: 'Mesa',
+    description: "De Madera",
+    price: 23.40,
+    Categories: [
+        { name: "Muebles", description: "Furniture" },
+        { name: "Taza", description: "Dishes" }
+    ]
+}, {
+    include: [ Category ]
+}).then(p => {
+    console.log("Product with categories susccessfully created.")
 });
+
+// Test Product Categories
+// Product.create({
+//     name: 'Panditas',
+//     description: 'Gomitas de colores',
+//     price: 7.50
+// }).then(product  => {
+//     return Category.create({ 
+//         name: "Dulces",
+//         description: "Candies"
+//      }).then(category => {
+//         return product.hasCategory(category)
+//             .then(result => {
+//                 // result would be false
+//                 console.log("There is no cat on prod");
+//                 return product.addCategory(category)
+//                     .then(() => {
+//                         // Cat added to prod
+//                         console.log("Cat added to prod");
+//                         return product.hasCategory(category)
+//                             .then(result => {
+//                                 console.log("There IS cat on prod");
+//                                 // result would be true
+//                             });
+//                     });
+//             });
+//     })
+// });
 // Test Shop & Coffee
 // Shop.create({
 //     name: 'Starfucks'
